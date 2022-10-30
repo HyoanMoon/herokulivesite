@@ -47,7 +47,7 @@ const DBConfig = __importStar(require("./db"));
 mongoose_1.default.connect(DBConfig.RemoteURI || DBConfig.LocalURI);
 const db = mongoose_1.default.connection;
 db.on("open", function () {
-    console.log(`Connected to MongoDB at: ${(DBConfig.RemoteURI) ? DBConfig.HostName : "localhost"}`);
+    console.log(`connected to MongoDB at: ${(DBConfig.RemoteURI) ? DBConfig.HostName : "localhost"}`);
 });
 db.on("error", function () {
     console.error(`Connection Error`);
@@ -61,8 +61,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../Client')));
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../node_modules')));
 app.use((0, cors_1.default)());
-app.use((0, express_session_1.default)({
-    secret: DBConfig.Secret,
+app.use((0, express_session_1.default)({ secret: DBConfig.Secret,
     saveUninitialized: false,
     resave: false
 }));

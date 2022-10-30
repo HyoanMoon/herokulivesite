@@ -1,41 +1,63 @@
 #!/usr/bin/env node
 
-import app from './Server/Config/app';
-import debug from 'debug';
-debug('lesson3:server');
+/**
+ * Module dependencies.
+ */
+
+import app from "./Server/Config/app";
+import debug from "debug";
+debug('week-4:server');
 import http from 'http';
-import { HttpError } from 'http-errors';
+import { HttpError } from "http-errors";
+
+
+/**
+ * Get port from environment and store in Express.
+ */
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const server = http.createServer(app);
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-function normalizePort(val:string) 
-{
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val :string) {
   var port = parseInt(val, 10);
 
-  if (isNaN(port)) 
-  {
+  if (isNaN(port)) {
+    // named pipe
     return val;
   }
 
-  if (port >= 0) 
-  {
+  if (port >= 0) {
+    // port number
     return port;
   }
 
   return false;
 }
 
-function onError(error: HttpError) 
-{
-  if (error.syscall !== 'listen') 
-  {
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error: HttpError) {
+  if (error.syscall !== 'listen') {
     throw error;
   }
 
@@ -62,9 +84,8 @@ function onError(error: HttpError)
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() 
-{
-  let addr = server.address() as string;
-  let bind = 'pipe ' + addr;
+function onListening() {
+  let addr = server.address() as String;
+  let bind ='pipe ' + addr;
   debug('Listening on ' + bind);
 }

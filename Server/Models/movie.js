@@ -13,6 +13,6 @@ const MovieSchema = new Schema({
 }, {
     collection: "movies"
 });
-const Model = mongoose_1.default.model("Movie", MovieSchema);
+const Model = mongoose_1.default.model("movies", MovieSchema);
 exports.default = Model;
 //# sourceMappingURL=movie.js.map
