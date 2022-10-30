@@ -1,30 +1,26 @@
 import express from 'express';
 const router = express.Router();
 
-import { AuthGuard } from '../Util';
+import { DisplayAddPage, DisplayEditPage, DisplayMovieListPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage } from '../Controllers/movie-list';
 
-import {DisplayAddPage, DisplayEditPage, DisplayMovieList, ProcessAddPage, ProcessDeletePage, ProcessEditPage} from "../Controllers/movie-list";
+import { AuthGuard } from '../Util/index';
 
-/* Display movie- list page */ 
-router.get('/movie-list', AuthGuard ,DisplayMovieList); 
+/* Display Movie List Page */
+router.get('/movie-list', AuthGuard, DisplayMovieListPage);
 
+/* Display Add Page */
+router.get('/add', AuthGuard, DisplayAddPage);
 
-/* Display Add  page */ 
-router.get('/add', AuthGuard ,DisplayAddPage); 
+/* Display Edit Page */
+router.get('/edit/:id', AuthGuard, DisplayEditPage);
 
-/* Display Edit page */ 
-router.get('/edit/:id', AuthGuard ,DisplayEditPage); 
+/* Process Add Page */
+router.post('/add', AuthGuard, ProcessAddPage);
 
-/* Process Add  page */ 
-router.post('/add', AuthGuard ,ProcessAddPage); 
+/* Process Edit Page */
+router.post('/edit/:id', AuthGuard, ProcessEditPage);
 
-/* Process Edit page */ 
-router.post('/edit/:id', AuthGuard ,ProcessEditPage); 
-
-/* Process Delete page */ 
-router.get('/delete/:id', AuthGuard ,ProcessDeletePage); 
-
-
-
+/* Process Delete Page */
+router.get('/delete/:id', AuthGuard, ProcessDeletePage);
 
 export default router;

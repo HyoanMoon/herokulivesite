@@ -9,7 +9,7 @@ const index_1 = require("../Controllers/index");
 router.get('/', index_1.DisplayHomePage);
 router.get('/home', index_1.DisplayHomePage);
 router.get('/about', index_1.DisplayAboutPage);
-router.get('/projects', index_1.DisplayProjectPage);
+router.get('/projects', index_1.DisplayProjectsPage);
 router.get('/services', index_1.DisplayServicesPage);
 router.get('/contact', index_1.DisplayContactPage);
 exports.default = router;

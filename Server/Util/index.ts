@@ -5,8 +5,8 @@ export function UserDisplayName(req: express.Request): string
 {
     if(req.user)
     {
-        let user = req.user as UserDocument
-        return user.DispalyName.toString();
+        let user = req.user as UserDocument;
+        return user.DisplayName.toString();
     }
     return '';
 }

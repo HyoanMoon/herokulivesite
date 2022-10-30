@@ -6,11 +6,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./Server/Config/app"));
 const debug_1 = __importDefault(require("debug"));
-(0, debug_1.default)('week-4:server');
+(0, debug_1.default)('lesson3:server');
 const http_1 = __importDefault(require("http"));
 const port = normalizePort(process.env.PORT || '3000');
 app_1.default.set('port', port);
-var server = http_1.default.createServer(app_1.default);
+const server = http_1.default.createServer(app_1.default);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

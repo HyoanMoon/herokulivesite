@@ -3,21 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessDeletePage = exports.ProcessEditPage = exports.ProcessAddPage = exports.DisplayEditPage = exports.DisplayAddPage = exports.DisplayMovieList = void 0;
+exports.ProcessDeletePage = exports.ProcessEditPage = exports.ProcessAddPage = exports.DisplayEditPage = exports.DisplayAddPage = exports.DisplayMovieListPage = void 0;
 const movie_1 = __importDefault(require("../Models/movie"));
-function DisplayMovieList(req, res, next) {
-    movie_1.default.find(function (err, moviesCollections) {
+const Util_1 = require("../Util");
+function DisplayMovieListPage(req, res, next) {
+    movie_1.default.find(function (err, moviesCollection) {
         if (err) {
-            console.error(err);
+            console.error(err.message);
             res.end(err);
         }
-        res.render('index', { title: 'Movie List', page: 'movie-list', movies: moviesCollections, displayName: '' });
+        res.render('index', { title: 'Movie List', page: 'movie-list', movies: moviesCollection, displayName: (0, Util_1.UserDisplayName)(req) });
     });
 }
-exports.DisplayMovieList = DisplayMovieList;
+exports.DisplayMovieListPage = DisplayMovieListPage;
 function DisplayAddPage(req, res, next) {
-    res.render('index', { title: 'Add', page: 'edit', movie: '', displayName: '' });
-    res.redirect('/movie-list');
+    res.render('index', { title: 'Add', page: 'edit', movie: '', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplayAddPage = DisplayAddPage;
 function DisplayEditPage(req, res, next) {
@@ -27,7 +27,7 @@ function DisplayEditPage(req, res, next) {
             console.error(err);
             res.end(err);
         }
-        res.render('index', { title: 'Edit', page: 'edit', movie: movieToEdit, displayName: '' });
+        res.render('index', { title: 'Edit', page: 'edit', movie: movieToEdit, displayName: (0, Util_1.UserDisplayName)(req) });
     });
 }
 exports.DisplayEditPage = DisplayEditPage;
@@ -49,8 +49,9 @@ function ProcessAddPage(req, res, next) {
 exports.ProcessAddPage = ProcessAddPage;
 function ProcessEditPage(req, res, next) {
     let id = req.params.id;
-    let updatedMovie = new movie_1.default({ "_id": id,
-        "name": req.body.movieName,
+    let updatedMovie = new movie_1.default({
+        "_id": id,
+        "Name": req.body.movieName,
         "Director": req.body.movieDirector,
         "Year": req.body.movieYear,
         "Rating": req.body.movieRating
